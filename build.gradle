@@ -1,0 +1,60 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.2'
+	id 'io.spring.dependency-management' version '1.1.2'
+}
+
+group = 'com.ingeocimyc'
+version = '1.0'
+
+java {
+	sourceCompatibility = '17'
+}
+jar {
+	manifest {
+		enabled = false
+		attributes 'Main-Class': 'com.ingeocimyc.lab.IngeocimycApplication'
+	}
+}
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//springframework
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//Add
+	implementation 'com.auth0:java-jwt:4.4.0'
+	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+	//Hakari ~
+	implementation 'com.zaxxer:HikariCP:4.0.3'
+	// MapStruct
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	compileOnly 'org.mapstruct:mapstruct:1.4.1.Final'
+	runtimeOnly 'org.postgresql:postgresql'
+	//Json
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+	// Lambook
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	// Swagger
+	implementation 'io.springfox:springfox-swagger2:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
