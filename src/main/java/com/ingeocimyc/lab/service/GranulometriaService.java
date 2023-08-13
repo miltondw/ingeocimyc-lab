@@ -14,10 +14,10 @@ public class GranulometriaService {
     public GranulometriaService(GranulometriaRepository granulometriaRepository) {
         this.granulometriaRepository = granulometriaRepository;
     }
-    public Optional<GranulometriaEntity> get(int projectId,int probeId,int muestraId){
-        return Optional.ofNullable(granulometriaRepository.get(projectId, probeId, muestraId));
+    public Optional<GranulometriaEntity> get(int muestraId){
+        return Optional.ofNullable(granulometriaRepository.get( muestraId));
     }
-    public GranulometriaEntity createGranulometria(GranulometriaEntity granulometria) {
+    public GranulometriaEntity create(GranulometriaEntity granulometria) {
         return granulometriaRepository.save(granulometria);
     }
 }

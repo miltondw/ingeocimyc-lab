@@ -25,7 +25,6 @@ public interface ProjectProjection {
     Double getDRY_SOIL_WEIGHT_EH();
     Double getWATER_WEIGHT_EH();
     Double getHUMIDITY_EH();
-    String getOBSERVATION_EH();
     Double[] getCYLINDER();
     // GRANULOMETRIA
     String getTAMICES_EG();
@@ -38,7 +37,6 @@ public interface ProjectProjection {
     Double getWATER_WEIGHT_EL();
     Double getDRY_SOIL_WEIGHT_EL();
     Double getHUMIDITY_EL();
-    String getOBSERVATION_EL();
     Integer getNUMERO_PRUEBA_EL();
     //PLASTICO
     Integer getTARE_NUMBER();

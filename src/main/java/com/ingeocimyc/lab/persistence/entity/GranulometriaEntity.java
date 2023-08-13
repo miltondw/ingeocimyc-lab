@@ -16,40 +16,27 @@ public class GranulometriaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-
     @Column(nullable = false)
     private Integer muestra_id;
-
     @Column(nullable = false)
     private String tamices;
 
     @Column
     private Double total;
-
     @Column(columnDefinition = "DOUBLE PRECISION[]")
     private double[] retenido;
-
     @Column(columnDefinition = "DOUBLE PRECISION[]")
     private double[] acum;
-
     @Column(columnDefinition = "DOUBLE PRECISION[]")
     private double[] pasa;
-
     @Column
     private Double grava;
-
     @Column
     private Double arena;
-
     @Column
     private Double finos;
-
-    @Column
-    private String observation;
-
     @Column
     private String sucs_data;
-
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "muestra_id", referencedColumnName = "id", insertable = false, updatable = false)

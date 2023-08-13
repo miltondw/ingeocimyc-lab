@@ -66,7 +66,6 @@ public class ProjectController {
             humedadData.put("drySoilWeightEH", projection.getDRY_SOIL_WEIGHT_EH());
             humedadData.put("waterWeightEH", projection.getWATER_WEIGHT_EH());
             humedadData.put("humidityEH", projection.getHUMIDITY_EH());
-            humedadData.put("observationEH", projection.getOBSERVATION_EH());
             humedadData.put("cylinder", projection.getCYLINDER());
             // Granulometría
             Map<String, Object> granulometriaData = new HashMap<>();
@@ -89,7 +88,7 @@ public class ProjectController {
             liquidoData.put("waterWeightEL", projection.getWATER_WEIGHT_EL());
             liquidoData.put("drySoilWeightEL", projection.getDRY_SOIL_WEIGHT_EL());
             liquidoData.put("humidityEL", projection.getHUMIDITY_EL());
-            liquidoData.put("observationEL", projection.getOBSERVATION_EL());
+
             liquidoData.put("numeroPruebaEL", projection.getNUMERO_PRUEBA_EL());
             // Plastico
             Map<String, Object> plasticoData = new HashMap<>();

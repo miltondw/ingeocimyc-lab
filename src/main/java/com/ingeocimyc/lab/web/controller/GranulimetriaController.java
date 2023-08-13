@@ -18,14 +18,12 @@ public class GranulimetriaController {
     }
 
     @GetMapping
-    public ResponseEntity<Optional<GranulometriaEntity>> get(@RequestParam Integer projectId,
-                                                             @RequestParam Integer probeId,
-                                                             @RequestParam Integer muestraId) {
-        return ResponseEntity.ok(this.granulometriaService.get(projectId,probeId,muestraId));
+    public ResponseEntity<Optional<GranulometriaEntity>> get( @RequestParam Integer muestraId) {
+        return ResponseEntity.ok(this.granulometriaService.get(muestraId));
     }
     @PostMapping
-    public ResponseEntity<GranulometriaEntity> createProject(@RequestBody GranulometriaEntity granulometria) {
-        GranulometriaEntity createdGranulometria = granulometriaService.createGranulometria(granulometria);
+    public ResponseEntity<GranulometriaEntity> create(@RequestBody GranulometriaEntity granulometria) {
+        GranulometriaEntity createdGranulometria = granulometriaService.create(granulometria);
         return new ResponseEntity<GranulometriaEntity>(createdGranulometria, HttpStatus.CREATED);
     }
 }

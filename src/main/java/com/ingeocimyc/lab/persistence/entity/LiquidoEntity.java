@@ -1,5 +1,6 @@
 package com.ingeocimyc.lab.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,10 +49,9 @@ public class LiquidoEntity {
     @Column(nullable = false)
     private Short numero_prueba;
 
-    @Column
-    private String observation;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "muestra_id", referencedColumnName = "id", insertable = false, updatable = false)
     private MuestraEntity muestra;
 }
