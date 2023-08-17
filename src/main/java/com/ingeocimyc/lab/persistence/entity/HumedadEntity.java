@@ -44,8 +44,8 @@ public class HumedadEntity {
     @Column(nullable = false, columnDefinition = "DOUBLE PRECISION[]")
     private double[] depth;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "muestra_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "muestra_id", referencedColumnName = "id",insertable=false, updatable=false)
     private MuestraEntity muestra;
 }

@@ -48,9 +48,9 @@ public class PlasticoEntity {
     @Column
     private String observation;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "muestra_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "muestra_id", referencedColumnName = "id",insertable=false, updatable=false)
     private MuestraEntity muestra;
 
 }

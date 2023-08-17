@@ -37,8 +37,9 @@ public class GranulometriaEntity {
     private Double finos;
     @Column
     private String sucs_data;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "muestra_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "muestra_id", referencedColumnName = "id",insertable=false, updatable=false)
     private MuestraEntity muestra;
+
 }

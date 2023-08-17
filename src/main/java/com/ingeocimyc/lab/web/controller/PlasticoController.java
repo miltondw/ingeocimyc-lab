@@ -26,4 +26,8 @@ public class PlasticoController {
         PlasticoEntity createdPlastico = plasticoService.create(plastico);
         return new ResponseEntity<PlasticoEntity>(createdPlastico, HttpStatus.CREATED);
     }
+    @PutMapping
+    public ResponseEntity<PlasticoEntity> update(@RequestBody PlasticoEntity ensayo) {
+        return ResponseEntity.ok(plasticoService.update(ensayo));
+    }
 }

@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface HumedadRepository extends ListCrudRepository<HumedadEntity, Integer> {
     @Query(value = "SELECT * FROM ensayo_humedad WHERE MUESTRA_ID = :muestraId", nativeQuery = true)
     HumedadEntity get(@Param("muestraId") Integer muestraId);
+    Optional<HumedadEntity> findByMuestraId(Integer id);
 }

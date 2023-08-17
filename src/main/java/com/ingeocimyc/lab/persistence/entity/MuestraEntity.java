@@ -18,11 +18,13 @@ public class MuestraEntity {
     private Integer id;
 
     @Column(nullable = false)
-    @JsonIgnore
     private Short muestra;
 
-    @ManyToOne
+    @Column
+    private Integer sondeo_id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "sondeo_id", referencedColumnName = "id")
+    @JoinColumn(name = "sondeo_id", referencedColumnName = "id",insertable=false, updatable=false)
     private SondeoEntity sondeo;
 }

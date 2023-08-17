@@ -11,12 +11,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/humedad")
 public class HumedadController {
-    private final HumedadService humedadService;
+    public final HumedadService humedadService;
 
     public HumedadController(HumedadService humedadService) {
         this.humedadService = humedadService;
     }
-
     @GetMapping
     public ResponseEntity<Optional<HumedadEntity>> get(@RequestParam Integer muestraId) {
         return ResponseEntity.ok(this.humedadService.get(muestraId));
@@ -25,5 +24,9 @@ public class HumedadController {
     public ResponseEntity<HumedadEntity> create(@RequestBody HumedadEntity humedad) {
         HumedadEntity createdGranulometria = humedadService.create(humedad);
         return new ResponseEntity<HumedadEntity>(createdGranulometria, HttpStatus.CREATED);
+    }
+    @PutMapping
+    public ResponseEntity<HumedadEntity> update(@RequestBody HumedadEntity ensayo) {
+        return ResponseEntity.ok(humedadService.update(ensayo));
     }
 }

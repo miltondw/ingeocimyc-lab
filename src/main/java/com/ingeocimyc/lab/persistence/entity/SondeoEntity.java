@@ -1,5 +1,6 @@
 package com.ingeocimyc.lab.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,14 @@ public class SondeoEntity {
     @Column(nullable = false)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column
     private Short probe;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    @Column
+    private Integer project_id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinColumn(name = "project_id", referencedColumnName = "id",insertable=false, updatable=false)
     private ProjectEntity project;
 }

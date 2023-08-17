@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface GranulometriaRepository extends ListCrudRepository<GranulometriaEntity, Integer> {
     @Query(value = "SELECT * FROM ENSAYO_GRANULOMETRIA WHERE MUESTRA_ID = :muestraId", nativeQuery = true)
     GranulometriaEntity get(@Param("muestraId") Integer muestraId);
+    Optional<GranulometriaEntity> findByMuestraId(Integer id);
 }

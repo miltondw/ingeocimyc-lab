@@ -26,4 +26,8 @@ public class LiquidoController {
         LiquidoEntity createdLiquido = liquidoService.create(liquido);
         return new ResponseEntity<LiquidoEntity>(createdLiquido, HttpStatus.CREATED);
     }
+    @PutMapping
+    public ResponseEntity<LiquidoEntity> update(@RequestBody LiquidoEntity ensayo) {
+        return ResponseEntity.ok(liquidoService.update(ensayo));
+    }
 }

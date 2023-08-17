@@ -26,4 +26,8 @@ public class GranulimetriaController {
         GranulometriaEntity createdGranulometria = granulometriaService.create(granulometria);
         return new ResponseEntity<GranulometriaEntity>(createdGranulometria, HttpStatus.CREATED);
     }
+    @PutMapping
+    public ResponseEntity<GranulometriaEntity> update(@RequestBody GranulometriaEntity granulometria) {
+        return ResponseEntity.ok(granulometriaService.update(granulometria));
+    }
 }

@@ -11,7 +11,10 @@ public class MuestraService {
     public MuestraService(MuestraRepository muestraRepository) {
         this.muestraRepository = muestraRepository;
     }
-    public MuestraEntity get(int projectId,int probeId,int muestraId){
-        return this.muestraRepository.get(projectId, probeId, muestraId);
+    public MuestraEntity get(int projectId,int probe,int muestra){
+        return this.muestraRepository.get(projectId, probe, muestra);
+    }
+    public MuestraEntity create(MuestraEntity muestra){
+        return this.muestraRepository.save(muestra);
     }
 }

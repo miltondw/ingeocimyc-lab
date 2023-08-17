@@ -1,5 +1,6 @@
 package com.ingeocimyc.lab.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,12 +37,27 @@ public class ProjectEntity {
     @Column
     private Date date;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "username",insertable=false, updatable=false)
-//    private UserEntity user;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "solicitante_id", referencedColumnName = "id",insertable=false, updatable=false)
-//    private SolicitanteEntity solicitante;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_id", referencedColumnName = "username",insertable=false, updatable=false)
+    private UserEntity user;
 
+   @ManyToOne
+   @JoinColumn(name = "solicitante_id", referencedColumnName = "id",insertable=false, updatable=false)
+   private SolicitanteEntity solicitante;
+
+    @Override
+    public String toString() {
+        return "ProjectEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                ", reference='" + reference + '\'' +
+                ", probes=" + probes +
+                ", user_id='" + user_id + '\'' +
+                ", solicitante_id='" + solicitante_id + '\'' +
+                ", date=" + date +
+                ", solicitante=" + solicitante +
+                '}';
+    }
 }

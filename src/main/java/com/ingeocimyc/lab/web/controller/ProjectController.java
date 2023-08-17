@@ -25,8 +25,14 @@ public class ProjectController {
 
     @GetMapping
     public ResponseEntity<Page<ProjectEntity>> getAll(  @RequestParam(defaultValue = "0") int page,
-                                                        @RequestParam(defaultValue = "6") int elements) {
-        return ResponseEntity.ok(projectService.getAll(page,elements));
+                                                        @RequestParam(defaultValue = "10") int elements,
+                                                        @RequestParam(defaultValue = "date") String sortBy,
+                                                        @RequestParam(defaultValue = "desc") String sortDirection) {
+        return ResponseEntity.ok(projectService.getAll(page,elements,sortBy,sortDirection));
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<ProjectEntity>> getById( @PathVariable Integer id) {
+        return ResponseEntity.ok(projectService.getById(id));
     }
 
     @GetMapping("/{projectId}/details")
@@ -131,5 +137,10 @@ public class ProjectController {
     public ResponseEntity<ProjectEntity> createProject(@RequestBody ProjectEntity project) {
         ProjectEntity createdProject = projectService.createProject(project);
         return new ResponseEntity<ProjectEntity>(createdProject, HttpStatus.CREATED);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        projectService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

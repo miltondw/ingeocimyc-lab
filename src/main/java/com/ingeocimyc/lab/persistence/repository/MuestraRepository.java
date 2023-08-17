@@ -14,9 +14,10 @@ public interface MuestraRepository extends ListCrudRepository<MuestraEntity,Inte
             "INNER JOIN SONDEO AS S ON S.PROJECT_ID = P.ID " +
             "INNER JOIN MUESTRA AS M ON M.SONDEO_ID = S.ID " +
             "WHERE P.ID = :projectId " +
-            "AND S.PROBE = :probeId " +
-            "AND M.MUESTRA = :muestraId", nativeQuery = true)
+            "AND S.PROBE = :probe " +
+            "AND M.MUESTRA = :muestra", nativeQuery = true)
     MuestraEntity get(@Param("projectId") Integer projectId,
-                            @Param("probeId") Integer probeId,
-                            @Param("muestraId") Integer muestraId);
+                            @Param("probe") Integer probeId,
+                            @Param("muestra") Integer muestraId);
+
 }
