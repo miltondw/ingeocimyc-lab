@@ -9,7 +9,8 @@ public interface ProjectProjection {
     String getREFERENCE();
     Date getDATE();
     //SOLICITANTE
-    String getSOLICITANTE();
+    String getNAME();
+    String getLASTNAME();
     //SONDEO
     Integer getPROBE();
     //MUESTRA
@@ -19,15 +20,20 @@ public interface ProjectProjection {
     Double getTARE_WEIGHT_H();
     // HUMEDAD
     Double[] getDEPTH();
-    Double getTARE_WEIGHT_EH();
-    Double getTARE_PLUS_WET_SOIL_WEIGHT_EH();
-    Double getTARE_PLUS_DRY_SOIL_EH();
-    Double getDRY_SOIL_WEIGHT_EH();
-    Double getWATER_WEIGHT_EH();
     Double getHUMIDITY_EH();
     Double[] getCYLINDER();
     // GRANULOMETRIA
-    String getTAMICES_EG();
+    String getTAMICES();
+    Double[] getacum();
+    Double getarena();
+    Double getfinos();
+    Double getgrava();
+    Double[] getpasa();
+    Double[] getretenido();
+    String getsucs_data();
+    Double gettotal();
+    Integer getID();
+    Integer getMUESTRA_ID();
     //Liquido
     Integer getNUMBER_OF_STROKES();
     Integer getTARE_NUMBER_EL();
@@ -37,6 +43,7 @@ public interface ProjectProjection {
     Double getWATER_WEIGHT_EL();
     Double getDRY_SOIL_WEIGHT_EL();
     Double getHUMIDITY_EL();
+    Double getlimite_liquido();
     Integer getNUMERO_PRUEBA_EL();
     //PLASTICO
     Integer getTARE_NUMBER();
@@ -48,5 +55,6 @@ public interface ProjectProjection {
     Double getHUMIDITY();
     String getOBSERVATION();
     Integer getNUMERO_PRUEBA();
+    Double getlimite_plastico();
 
 }

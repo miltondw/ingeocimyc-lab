@@ -58,7 +58,7 @@ public class ProjectController {
             headerData.put("location", projection.getLOCATION());
             headerData.put("reference", projection.getREFERENCE());
             headerData.put("date", projection.getDATE());
-            headerData.put("name", projection.getSOLICITANTE());
+            headerData.put("name", projection.getNAME()+' '+projection.getLASTNAME());
             headerData.put("probe", projection.getPROBE());
             headerData.put("muestra", projection.getMUESTRA());
             headerData.put("sampleWeight", projection.getSAMPLE_WEIGHT());
@@ -66,20 +66,25 @@ public class ProjectController {
             // Agrupar los datos de HUMEDAD
             Map<String, Object> humedadData = new HashMap<>();
             humedadData.put("depth", projection.getDEPTH());
-            humedadData.put("tareWeightEH", projection.getTARE_WEIGHT_EH());
-            humedadData.put("tarePlusWetSoilWeightEH", projection.getTARE_PLUS_WET_SOIL_WEIGHT_EH());
-            humedadData.put("tarePlusDrySoilEH", projection.getTARE_PLUS_DRY_SOIL_EH());
-            humedadData.put("drySoilWeightEH", projection.getDRY_SOIL_WEIGHT_EH());
-            humedadData.put("waterWeightEH", projection.getWATER_WEIGHT_EH());
-            humedadData.put("humidityEH", projection.getHUMIDITY_EH());
+            humedadData.put("humidity", projection.getHUMIDITY_EH());
             humedadData.put("cylinder", projection.getCYLINDER());
             // Granulometría
             Map<String, Object> granulometriaData = new HashMap<>();
-            String tamicesJsonString = projection.getTAMICES_EG();
+            String tamicesJsonString = projection.getTAMICES();
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
                 TamicesData tamicesData = objectMapper.readValue(tamicesJsonString, TamicesData.class);
                 granulometriaData.put("tamices", tamicesData);
+                granulometriaData.put("acum", projection.getacum());
+                granulometriaData.put("arena", projection.getarena());
+                granulometriaData.put("finos", projection.getfinos());
+                granulometriaData.put("grava", projection.getgrava());
+                granulometriaData.put("pasa", projection.getpasa());
+                granulometriaData.put("retenido", projection.getretenido());
+                granulometriaData.put("sucs_data", projection.getsucs_data());
+                granulometriaData.put("total", projection.gettotal());
+                granulometriaData.put("id", projection.getID());
+                granulometriaData.put("muestra_id", projection.getMUESTRA_ID());
             } catch (Exception e) {
                 e.printStackTrace();
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -94,7 +99,7 @@ public class ProjectController {
             liquidoData.put("waterWeightEL", projection.getWATER_WEIGHT_EL());
             liquidoData.put("drySoilWeightEL", projection.getDRY_SOIL_WEIGHT_EL());
             liquidoData.put("humidityEL", projection.getHUMIDITY_EL());
-
+            liquidoData.put("limite_liquido", projection.getlimite_liquido());
             liquidoData.put("numeroPruebaEL", projection.getNUMERO_PRUEBA_EL());
             // Plastico
             Map<String, Object> plasticoData = new HashMap<>();
@@ -107,6 +112,7 @@ public class ProjectController {
             plasticoData.put("humidity", projection.getHUMIDITY());
             plasticoData.put("observation", projection.getOBSERVATION());
             plasticoData.put("numeroPrueba", projection.getNUMERO_PRUEBA());
+            plasticoData.put("limite_plastico", projection.getlimite_plastico());
             //General Structure
             if(count==1){
                 liquidoDataList.add(liquidoData);

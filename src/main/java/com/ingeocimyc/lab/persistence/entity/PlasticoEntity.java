@@ -47,7 +47,8 @@ public class PlasticoEntity {
 
     @Column
     private String observation;
-
+    @Column
+    private Double limite_plastico;
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "muestra_id", referencedColumnName = "id",insertable=false, updatable=false)
