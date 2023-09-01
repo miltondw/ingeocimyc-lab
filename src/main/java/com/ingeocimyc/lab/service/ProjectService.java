@@ -3,6 +3,7 @@ package com.ingeocimyc.lab.service;
 import com.ingeocimyc.lab.persistence.entity.*;
 import com.ingeocimyc.lab.persistence.projection.ProjectProjection;
 import com.ingeocimyc.lab.persistence.repository.*;
+import jakarta.persistence.EntityNotFoundException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,16 +41,38 @@ public class ProjectService {
         return projectRepository.getProjectDetails(projectId, probeId, muestraId);
     }
 
-    public ProjectEntity createProject(ProjectEntity project) {
+    public ProjectEntity create(ProjectEntity project) {
         ProjectEntity savedProject = projectRepository.save(project);
-        createProbesForProject(savedProject);
+        createProbesForProject(savedProject, (short) 0);
         return savedProject;
     }
+    public ProjectEntity update(ProjectEntity newProject) {
+        Integer id =newProject.getId();
+        ProjectEntity oldProject = projectRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("not found with ID: " + id));
 
-    private void createProbesForProject(@NotNull ProjectEntity project) {
+        oldProject.setTitle(newProject.getTitle());
+        oldProject.setLocation(newProject.getLocation());
+        oldProject.setReference(newProject.getReference());
+        oldProject.setSolicitante(newProject.getSolicitante());
+        oldProject.setSolicitante_id(newProject.getSolicitante_id());
+        oldProject.setUser_id(newProject.getUser_id());
+        oldProject.setDate(newProject.getDate());
+        oldProject.setUser(newProject.getUser());
+
+        if(oldProject.getProbes() < newProject.getProbes()) {
+            short probes=oldProject.getProbes();
+            oldProject.setProbes(newProject.getProbes());
+            createProbesForProject(oldProject,probes);
+        }
+        return projectRepository.save(oldProject);
+    }
+
+    private void createProbesForProject(@NotNull ProjectEntity project, short index) {
         System.out.println(project);
         short numProbes = project.getProbes();
-        for (short i = 1; i <= numProbes; i++) {
+        short i = (short) (index+1);
+        for (; i <= numProbes; i++) {
             SondeoEntity sondeo = new SondeoEntity();
             MuestraEntity muestra = new MuestraEntity();
             sondeo.setProject(project);

@@ -114,17 +114,21 @@ public class ProjectController {
             plasticoData.put("numeroPrueba", projection.getNUMERO_PRUEBA());
             plasticoData.put("limite_plastico", projection.getlimite_plastico());
             //General Structure
+
             if(count==1){
-                liquidoDataList.add(liquidoData);
                 dataMap.put("header", headerData);
                 dataMap.put("humedad", humedadData);
                 dataMap.put("granulometria", granulometriaData);
                 plasticoDataList.add(plasticoData);
                 arrayData.add(dataMap);
             }
-            if(count==4){
+
+            if(count==2){
                 liquidoDataList.add(liquidoData);
+            }
+            if(count==4){
                 plasticoDataList.add(plasticoData);
+                liquidoDataList.add(liquidoData);
                 dataMap.put("plastico", plasticoDataList);
                 arrayData.add(dataMap);
             }
@@ -133,6 +137,18 @@ public class ProjectController {
                 dataMap.put("liquido", liquidoDataList);
                 arrayData.add(dataMap);
             }
+//            plasticoDataList = plasticoDataList.stream()
+//                    .filter(item -> item.get("numeroPrueba") == null || item.get("numeroPrueba").equals(1) || item.get("numeroPrueba").equals(2))
+//                    .distinct()
+//                    .collect(Collectors.toList());
+//
+//// Eliminar duplicados en liquidoDataList basados en numeroPruebaEL
+//            liquidoDataList = liquidoDataList.stream()
+//                    .filter(item -> item.get("numeroPruebaEL") == null || (item.get("numeroPruebaEL").equals(1) || item.get("numeroPruebaEL").equals(2) || item.get("numeroPruebaEL").equals(3)))
+//                    .distinct()
+//                    .collect(Collectors.toList());
+            System.out.println(liquidoData+" Liquido"+count+"\n");
+            System.out.println(plasticoData+" PLastico");
             count=count+1;
         }
 
@@ -141,8 +157,12 @@ public class ProjectController {
 
     @PostMapping
     public ResponseEntity<ProjectEntity> createProject(@RequestBody ProjectEntity project) {
-        ProjectEntity createdProject = projectService.createProject(project);
+        ProjectEntity createdProject = projectService.create(project);
         return new ResponseEntity<ProjectEntity>(createdProject, HttpStatus.CREATED);
+    }
+    @PutMapping
+    public ResponseEntity<ProjectEntity> update(@RequestBody ProjectEntity project) {
+        return ResponseEntity.ok(projectService.update(project));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {

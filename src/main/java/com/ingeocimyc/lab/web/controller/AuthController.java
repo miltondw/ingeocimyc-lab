@@ -30,6 +30,7 @@ public class AuthController {
         );
         authenticationManager.authenticate(login);
         String Jwt= jwtUtil.create(loginDto.getUsername());
+
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION,Jwt).build();
     }
 }

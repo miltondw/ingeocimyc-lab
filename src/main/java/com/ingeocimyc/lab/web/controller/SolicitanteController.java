@@ -1,6 +1,5 @@
 package com.ingeocimyc.lab.web.controller;
 
-import com.ingeocimyc.lab.persistence.entity.ProjectEntity;
 import com.ingeocimyc.lab.persistence.entity.SolicitanteEntity;
 import com.ingeocimyc.lab.service.SolicitanteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/solicitante")
@@ -32,10 +32,24 @@ public class SolicitanteController {
     ) {
         return ResponseEntity.ok(solicitanteService.getByName(nombre));
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<SolicitanteEntity>> getById(@PathVariable String id) {
+        return ResponseEntity.ok(solicitanteService.getById(id));
+    }
     @PostMapping
     public ResponseEntity<SolicitanteEntity> createSolicitante(@RequestBody SolicitanteEntity solicitante) {
-        SolicitanteEntity createdProject = solicitanteService.createSolicitante(solicitante);
+        SolicitanteEntity createdProject = solicitanteService.create(solicitante);
         return new ResponseEntity<SolicitanteEntity>(createdProject, HttpStatus.CREATED);
+    }
+    @PutMapping
+    public ResponseEntity<SolicitanteEntity> update(@RequestBody SolicitanteEntity solicitante) {
+        return ResponseEntity.ok(solicitanteService.update(solicitante));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        solicitanteService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }
